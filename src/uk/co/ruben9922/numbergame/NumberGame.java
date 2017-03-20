@@ -45,8 +45,8 @@ public class NumberGame {
                     // Check for uniqueness
                     String existingPlayerName = "";
                     for (int j = 0; j < i; j++) {
-                        existingPlayerName = playerArray[j].getName().toLowerCase();
-                        if (playerName.toLowerCase().equals(existingPlayerName)) {
+                        existingPlayerName = playerArray[j].getName();
+                        if (playerName.toLowerCase().equals(existingPlayerName.toLowerCase())) {
                             unique = false;
                             break;
                         }
