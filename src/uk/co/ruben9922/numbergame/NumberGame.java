@@ -58,6 +58,7 @@ public class NumberGame {
                 playerArray[i] = new Player(playerName);
             } while (!unique);
         }
+        System.out.println();
 
         return Arrays.asList(playerArray);
     }
