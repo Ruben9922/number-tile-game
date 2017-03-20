@@ -43,14 +43,16 @@ public class NumberGame {
                     playerName = "Player " + (i + 1);
                 } else {
                     // Check for uniqueness
+                    String existingPlayerName = "";
                     for (int j = 0; j < i; j++) {
-                        if (playerName.equals(playerArray[j].getName())) {
+                        existingPlayerName = playerArray[j].getName().toLowerCase();
+                        if (playerName.toLowerCase().equals(existingPlayerName)) {
                             unique = false;
                             break;
                         }
                     }
                     if (!unique) {
-                        System.out.format("The name %s is already taken! Enter a different name.\n", playerName);
+                        System.out.format("The name %s is already taken! Enter a different name.\n", existingPlayerName);
                     }
                 }
                 playerArray[i] = new Player(playerName);
