@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NumberGameTest1
 {
-    class Tile
+    class Tile : ICloneable
     {
         public enum Colours
         {
@@ -46,8 +42,20 @@ namespace NumberGameTest1
 
         public Tile(int number, int colour)
         {
-            this.Number = number;
-            this.Colour = colour;
+            Number = number;
+            Colour = colour;
+        }
+
+        public Tile Clone()
+        {
+            return new Tile(Number, Colour);
+        }
+
+        // Based on StackOverflow answer: http://stackoverflow.com/a/536362/3806231
+        // Author: Marc Gravell (http://stackoverflow.com/users/23354/marc-gravell)
+        object ICloneable.Clone()
+        {
+            return Clone();
         }
 
         //public void DisplayTileString()
@@ -81,11 +89,10 @@ namespace NumberGameTest1
         //    Console.ResetColor();
         //}
 
-        public void DisplayTileString()
+        public override string ToString()
         {
-            Console.ForegroundColor = ConsoleColor.White;
             string colourString;
-            switch (Colour)
+            switch (Colour) // Adding trailing spaces to colours so numbers are aligned
             {
                 case (int)Colours.Black:
                     colourString = "Black";
@@ -112,8 +119,7 @@ namespace NumberGameTest1
             {
                 numberString = number.ToString();
             }
-            Console.Write("{0} {1}", colourString, numberString);
-            Console.ResetColor();
+            return string.Format("{0} {1}", colourString, numberString); // Could use different colours
         }
     }
 }

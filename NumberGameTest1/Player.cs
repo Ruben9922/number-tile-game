@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace NumberGameTest1
 {
@@ -24,10 +20,11 @@ namespace NumberGameTest1
             }
         }
         public List<Tile> Tiles { get; set; } = new List<Tile>();
+        public bool IsPlaying { get; set; } = true;
 
         public Player(string name)
         {
-            this.Name = name;
+            Name = name;
         }
     }
 }
