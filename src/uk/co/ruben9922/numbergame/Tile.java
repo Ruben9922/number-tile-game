@@ -2,7 +2,13 @@ package uk.co.ruben9922.numbergame;
 
 abstract class Tile {
     public enum Colour {
-        BLACK, BLUE, ORANGE, RED
+        BLACK, BLUE, ORANGE, RED;
+
+        @Override
+        public String toString() {
+            String defaultString = super.toString();
+            return defaultString.substring(0, 1).toUpperCase() + defaultString.substring(1).toLowerCase();
+        }
     }
 
     protected Colour colour;
