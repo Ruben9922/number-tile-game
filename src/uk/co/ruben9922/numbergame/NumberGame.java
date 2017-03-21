@@ -3,6 +3,7 @@ package uk.co.ruben9922.numbergame;
 import org.jetbrains.annotations.NotNull;
 import uk.co.ruben9922.utilities.consoleutilities.InputUtilities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -17,9 +18,19 @@ public class NumberGame {
 
         List<Player> players = createPlayers(scanner);
 
-        // Simply output player names for testing
+        // Simply print player names for testing
         for (Player player : players) {
             System.out.println(player.getName());
+        }
+
+        List<Tile> tiles = generateTiles(2, 13, Arrays.asList(new Tile[] {
+                new SmileyTile(Tile.Colour.BLACK),
+                new SmileyTile(Tile.Colour.ORANGE)
+        }));
+
+        // Print all tiles for testing
+        for (Tile tile : tiles) {
+            System.out.println(tile.toString());
         }
     }
 
@@ -61,5 +72,25 @@ public class NumberGame {
         System.out.println();
 
         return Arrays.asList(playerArray);
+    }
+
+    // maxTileNumber is inclusive
+    private static List<Tile> generateTiles(int numberTileCopies, int maxTileNumber, List<Tile> extraTiles) {
+        Tile.Colour[] colourValues = Tile.Colour.values();
+        List<Tile> tiles = new ArrayList<>((numberTileCopies * colourValues.length) + extraTiles.size());
+
+        for (Tile.Colour colour : colourValues) {
+            for (int i = 0; i < numberTileCopies; i++) {
+                for (int j = 1; j <= maxTileNumber; j++) {
+                    tiles.add(new NumberTile(colour, j));
+                }
+            }
+        }
+
+        for (Tile tile : extraTiles) {
+            tiles.add(tile);
+        }
+
+        return tiles;
     }
 }
