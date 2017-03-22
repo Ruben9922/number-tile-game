@@ -18,20 +18,10 @@ public class NumberGame {
 
         List<Player> players = createPlayers(scanner);
 
-        // Simply print player names for testing
-        for (Player player : players) {
-            System.out.println(player.getName());
-        }
-
         List<Tile> tiles = generateTiles(2, 1, 13, Arrays.asList(new Tile[] {
                 new SmileyTile(Tile.Colour.BLACK),
                 new SmileyTile(Tile.Colour.ORANGE)
         }));
-
-        // Print all tiles for testing
-        for (Tile tile : tiles) {
-            System.out.println(tile.toString());
-        }
     }
 
     @NotNull
