@@ -44,38 +44,39 @@ public class NumberGame {
         scanner.nextLine();
 
         // Initialise array then, for each player, input name, create Player object and add object to array
-        Player[] playerArray = new Player[PLAYER_COUNT];
-        for (int i = 0; i < playerArray.length; i++) {
-            boolean unique;
-            do {
-                System.out.format("Player %1$d's name (leave blank for \"Player %1$d\"): ", i + 1);
-                String playerName = scanner.nextLine().trim();
-
-                unique = true;
-                if (playerName.isEmpty()) {
-                    // Implementing the "leave blank for ..." from prompt above
-                    playerName = "Player " + (i + 1);
-                } else {
-                    // Check for uniqueness
-                    for (int j = 0; j < i; j++) {
-                        String existingPlayerName = playerArray[j].getName();
-                        if (playerName.toLowerCase().equals(existingPlayerName.toLowerCase())) {
-                            unique = false;
-                            System.out.format("The name %s is already taken! Enter a different name.\n", existingPlayerName); // Might move this later
-                            break;
-                        }
-                    }
-                }
-
-                // If player name is unique, create new Player, add it to array and print success message
-                if (unique) {
-                    playerArray[i] = new Player(playerName);
-                    System.out.format("Player \"%s\" added.\n\n", playerName);
-                }
-            } while (!unique);
+        List<Player> players = new ArrayList<>(PLAYER_COUNT);
+        for (int i = 0; i < PLAYER_COUNT; i++) {
+            String playerName = inputPlayerName(scanner, players);
+            players.add(new Player(playerName));
+            System.out.format("Player \"%s\" added.\n\n", playerName);
         }
 
-        return Arrays.asList(playerArray);
+        return players;
+    }
+
+    private static String inputPlayerName(Scanner scanner, List<Player> existingPlayers) {
+        String playerName;
+        boolean unique;
+        do {
+            System.out.format("Player %1$d's name (leave blank for \"Player %1$d\"): ", existingPlayers.size() + 1);
+            playerName = scanner.nextLine().trim();
+
+            unique = true;
+            if (playerName.isEmpty()) {
+                // Implementing the "leave blank for ..." from prompt above
+                playerName = "Player " + (existingPlayers.size() + 1);
+            } else {
+                // Check for uniqueness
+                for (Player player : existingPlayers) {
+                    if (playerName.toLowerCase().equals(player.getName().toLowerCase())) {
+                        unique = false;
+                        System.out.format("The name %s is already taken! Enter a different name.\n", player.getName()); // Might move this later
+                        break;
+                    }
+                }
+            }
+        } while (!unique);
+        return playerName;
     }
 
     // minTileNumber and maxTileNumber are both inclusive
