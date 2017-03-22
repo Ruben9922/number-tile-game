@@ -52,11 +52,15 @@ public class NumberGame {
                             break;
                         }
                     }
-                    if (!unique) {
+
+                    // If player name is unique, create new Player and add to array
+                    // Otherwise, print error message
+                    if (unique) {
+                        playerArray[i] = new Player(playerName);
+                    } else {
                         System.out.format("The name %s is already taken! Enter a different name.\n", existingPlayerName);
                     }
                 }
-                playerArray[i] = new Player(playerName);
             } while (!unique);
         }
         System.out.println();
