@@ -53,10 +53,11 @@ public class NumberGame {
                         }
                     }
 
-                    // If player name is unique, create new Player and add to array
+                    // If player name is unique, create new Player, add it to array and print success message
                     // Otherwise, print error message
                     if (unique) {
                         playerArray[i] = new Player(playerName);
+                        System.out.format("Player \"%s\" added.", playerName);
                     } else {
                         System.out.format("The name %s is already taken! Enter a different name.\n", existingPlayerName);
                     }
