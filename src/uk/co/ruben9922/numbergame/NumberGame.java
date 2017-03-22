@@ -3,14 +3,12 @@ package uk.co.ruben9922.numbergame;
 import org.jetbrains.annotations.NotNull;
 import uk.co.ruben9922.utilities.consoleutilities.InputUtilities;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class NumberGame {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
 
         // Welcome message
         System.out.println("Number Game");
@@ -22,6 +20,11 @@ public class NumberGame {
                 new SmileyTile(Tile.Colour.BLACK),
                 new SmileyTile(Tile.Colour.ORANGE)
         }));
+
+        // Give players tiles
+        for (Player player : players) {
+            givePlayerTiles(random, player, tiles, 14);
+        }
     }
 
     @NotNull
@@ -83,5 +86,13 @@ public class NumberGame {
         }
 
         return tiles;
+    }
+
+    private static void givePlayerTiles(Random random, Player player, List<Tile> tiles, int tileCount) {
+        for (int i = 0; i < tileCount; i++) {
+            int index = random.nextInt(tiles.size());
+            Tile tile = tiles.remove(index);
+            player.getTiles().add(tile);
+        }
     }
 }
