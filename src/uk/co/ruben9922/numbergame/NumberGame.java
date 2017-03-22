@@ -21,9 +21,18 @@ public class NumberGame {
         }));
 
         // Give players tiles
-        System.out.println("Giving each player 14 tiles...");
+        System.out.println("Giving each player 14 tiles...\n");
         for (Player player : players) {
             givePlayerTiles(random, player, tiles, 14);
+        }
+
+        // Main game
+        for (Player player : players) {
+            System.out.format("%s's Turn\n", player.getName());
+            System.out.println("Tiles: ");
+            printTiles(player.getTiles());
+
+            System.out.println();
         }
     }
 
@@ -93,6 +102,15 @@ public class NumberGame {
             int index = random.nextInt(tiles.size());
             Tile tile = tiles.remove(index);
             player.getTiles().add(tile);
+        }
+    }
+
+    private static void printTiles(List<Tile> tiles) {
+        ListIterator<Tile> listIterator = tiles.listIterator();
+        while (listIterator.hasNext()) {
+            Tile tile = listIterator.next();
+            int index = listIterator.nextIndex();
+            System.out.format("[%d] %s\n", index, tile.toString());
         }
     }
 }
