@@ -11,8 +11,7 @@ public class NumberGame {
         Random random = new Random();
 
         // Welcome message
-        System.out.println("Number Game");
-        System.out.println();
+        System.out.println("Number Game\n");
 
         List<Player> players = createPlayers(scanner);
 
@@ -22,6 +21,7 @@ public class NumberGame {
         }));
 
         // Give players tiles
+        System.out.println("Giving each player 14 tiles...");
         for (Player player : players) {
             givePlayerTiles(random, player, tiles, 14);
         }
