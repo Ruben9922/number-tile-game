@@ -71,7 +71,7 @@ public class NumberGame {
     // minTileNumber and maxTileNumber are both inclusive
     private static List<Tile> generateTiles(int numberTileCopies, int minTileNumber, int maxTileNumber, List<Tile> extraTiles) {
         Tile.Colour[] colourValues = Tile.Colour.values();
-        List<Tile> tiles = new ArrayList<>((numberTileCopies * colourValues.length) + extraTiles.size());
+        List<Tile> tiles = new LinkedList<>();
 
         for (Tile.Colour colour : colourValues) {
             for (int i = 0; i < numberTileCopies; i++) {
