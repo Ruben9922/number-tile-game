@@ -1,6 +1,6 @@
 package uk.co.ruben9922.numbergame;
 
-public class NumberTile extends Tile {
+class NumberTile extends Tile {
     private int number;
 
     public NumberTile(Colour colour, int number) {
