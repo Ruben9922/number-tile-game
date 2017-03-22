@@ -21,9 +21,10 @@ public class NumberGame {
         }));
 
         // Give players tiles
-        System.out.println("Giving each player 14 tiles...\n");
+        final int INITIAL_PLAYER_TILE_COUNT = 14;
+        System.out.format("Giving each player %d tiles...\n\n", INITIAL_PLAYER_TILE_COUNT);
         for (Player player : players) {
-            givePlayerTiles(random, player, tiles, 14);
+            givePlayerTiles(random, player, tiles, INITIAL_PLAYER_TILE_COUNT);
         }
 
         // Main game
