@@ -7,7 +7,7 @@ import java.util.*;
 
 class NumberGame {
     private List<Player> players = new LinkedList<>();
-    private List<Tile> tiles = new LinkedList<>();
+    private List<Tile> tiles = new LinkedList<>(); // Tiles not yet given to a player
 
     public NumberGame() {
 
@@ -52,7 +52,7 @@ class NumberGame {
     @Nullable
     private String findMatchingPlayerName(List<Player> existingPlayers, String playerName) {
         for (Player player : existingPlayers) {
-            if (playerName.toLowerCase().equals(player.getName().toLowerCase())) {
+            if (playerName.toLowerCase().equals(player.getName().toLowerCase())) { // Ignoring case
                 return player.getName();
             }
         }
