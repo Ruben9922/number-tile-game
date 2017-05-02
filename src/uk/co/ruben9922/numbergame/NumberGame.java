@@ -1,5 +1,6 @@
 package uk.co.ruben9922.numbergame;
 
+import org.jetbrains.annotations.Nullable;
 import uk.co.ruben9922.utilities.consoleutilities.InputUtilities;
 
 import java.util.*;
@@ -32,21 +33,30 @@ class NumberGame {
             playerName = scanner.nextLine().trim();
 
             unique = true;
+
+            // Implementing the "leave blank for ..." from prompt above
             if (playerName.isEmpty()) {
-                // Implementing the "leave blank for ..." from prompt above
                 playerName = "Player " + (existingPlayers.size() + 1);
             } else {
                 // Check for uniqueness
-                for (Player player : existingPlayers) {
-                    if (playerName.toLowerCase().equals(player.getName().toLowerCase())) {
-                        unique = false;
-                        System.out.format("The name %s is already taken! Enter a different name.\n", player.getName()); // Might move this later
-                        break;
-                    }
+                String existingPlayerName = findMatchingPlayerName(existingPlayers, playerName);
+                unique = (existingPlayerName == null);
+                if (!unique) {
+                    System.out.format("The name %s is already taken! Enter a different name.\n", existingPlayerName); // Might move this later
                 }
             }
         } while (!unique);
         return playerName;
+    }
+
+    @Nullable
+    private String findMatchingPlayerName(List<Player> existingPlayers, String playerName) {
+        for (Player player : existingPlayers) {
+            if (playerName.toLowerCase().equals(player.getName().toLowerCase())) {
+                return player.getName();
+            }
+        }
+        return null;
     }
 
     // minTileNumber and maxTileNumber are both inclusive
