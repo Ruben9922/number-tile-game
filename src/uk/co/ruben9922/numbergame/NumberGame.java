@@ -32,8 +32,6 @@ class NumberGame {
             System.out.format("Player %1$d's name (leave blank for \"Player %1$d\"): ", existingPlayers.size() + 1);
             playerName = scanner.nextLine().trim();
 
-            unique = true;
-
             // Implementing the "leave blank for ..." from prompt above
             if (playerName.isEmpty()) {
                 playerName = "Player " + (existingPlayers.size() + 1);
