@@ -14,6 +14,8 @@ abstract class Tile {
     @Override
     public abstract String toString();
 
+    public abstract TileType getTileType();
+
     public enum Colour {
         BLACK, BLUE, ORANGE, RED;
 
@@ -22,5 +24,9 @@ abstract class Tile {
             String defaultString = super.toString();
             return defaultString.substring(0, 1).toUpperCase() + defaultString.substring(1).toLowerCase();
         }
+    }
+
+    public enum TileType {
+        NUMBER, SMILEY
     }
 }

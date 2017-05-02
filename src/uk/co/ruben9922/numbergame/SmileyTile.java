@@ -9,4 +9,8 @@ class SmileyTile extends Tile {
     public String toString() {
         return colour.toString() + " " + "Smiley";
     }
+
+    public TileType getTileType() {
+        return TileType.SMILEY;
+    }
 }

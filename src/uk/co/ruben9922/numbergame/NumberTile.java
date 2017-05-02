@@ -16,4 +16,8 @@ class NumberTile extends Tile {
     public String toString() {
         return colour.toString() + " " + number;
     }
+
+    public TileType getTileType() {
+        return TileType.NUMBER;
+    }
 }

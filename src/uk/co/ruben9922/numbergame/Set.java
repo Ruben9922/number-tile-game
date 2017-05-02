@@ -33,7 +33,7 @@ class Set {
         NumberTile referenceNumberTile = null;
         while (listIterator.hasNext()) {
             Tile tile = listIterator.next();
-            if (tile instanceof NumberTile) { // May change later to not use instanceof
+            if (tile.getTileType() == Tile.TileType.NUMBER) {
                 referenceNumberTile = (NumberTile) tile;
                 break;
             }
@@ -49,7 +49,7 @@ class Set {
 
         while (listIterator.hasNext()) {
             Tile tile = listIterator.next();
-            if (tile instanceof NumberTile) {
+            if (tile.getTileType() == Tile.TileType.NUMBER) {
                 NumberTile numberTile = (NumberTile) tile;
 
                 if (numberTile.getColour() != referenceColour || numberTile.getNumber() != referenceNumber
