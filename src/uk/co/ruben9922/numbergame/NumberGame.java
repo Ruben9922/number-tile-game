@@ -37,13 +37,13 @@ class NumberGame {
             // Implementing the "leave blank for ..." from prompt above
             if (playerName.isEmpty()) {
                 playerName = "Player " + (existingPlayers.size() + 1);
-            } else {
-                // Check for uniqueness
-                String existingPlayerName = findMatchingPlayerName(existingPlayers, playerName);
-                unique = (existingPlayerName == null);
-                if (!unique) {
-                    System.out.format("The name %s is already taken! Enter a different name.\n", existingPlayerName); // Might move this later
-                }
+            }
+
+            // Check for uniqueness
+            String existingPlayerName = findMatchingPlayerName(existingPlayers, playerName);
+            unique = (existingPlayerName == null);
+            if (!unique) {
+                System.out.format("The name %s is already taken! Enter a different name.\n", existingPlayerName); // Might move this later
             }
         } while (!unique);
         return playerName;
