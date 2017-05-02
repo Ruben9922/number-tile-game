@@ -5,10 +5,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 class Set {
-    public enum SetType {
-        INVALID, RUN, GROUP
-    }
-
     private List<Tile> tiles;
 
     public Set() {
@@ -75,5 +71,9 @@ class Set {
         }
 
         return SetType.INVALID; // Set is long enough but is neither a run nor group
+    }
+
+    public enum SetType {
+        INVALID, RUN, GROUP
     }
 }
