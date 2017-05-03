@@ -34,7 +34,7 @@ class Set {
         while (listIterator.hasNext()) {
             Tile tile = listIterator.next();
             if (tile.getTileType() == Tile.TileType.NUMBER) {
-                referenceNumberTile = (NumberTile) tile;
+                referenceNumberTile = (NumberTile) tile; // Will try to find a way not using casts
                 break;
             }
         }

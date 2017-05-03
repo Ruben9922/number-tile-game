@@ -8,6 +8,7 @@ import java.util.*;
 class NumberGame {
     private List<Player> players = new LinkedList<>();
     private List<Tile> tiles = new LinkedList<>(); // Tiles not yet given to a player
+    private List<Set> sets = new LinkedList<>();
 
     public NumberGame() {
 
@@ -90,9 +91,15 @@ class NumberGame {
     public void playGame() {
         for (Player player : players) {
             System.out.format("%s's Turn\n", player.getName());
-            System.out.println("Tiles: ");
-            printList(player.getTiles(), true);
 
+            // Display sets "on table"
+            System.out.println("Tiles currently on table:");
+            printList(sets, true); // TODO: Create toString method
+            System.out.println();
+
+            // Display current player's tiles
+            System.out.println("Tiles:");
+            printList(player.getTiles(), true);
             System.out.println();
         }
     }
