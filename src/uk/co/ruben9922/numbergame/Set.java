@@ -1,5 +1,6 @@
 package uk.co.ruben9922.numbergame;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -17,6 +18,21 @@ class Set {
 
     public List<Tile> getTiles() {
         return tiles;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        Iterator<Tile> iterator = tiles.iterator();
+        while (iterator.hasNext()) {
+            Tile tile = iterator.next();
+            stringBuilder.append(tile.toString());
+
+            if (iterator.hasNext()) { // If not last item
+                stringBuilder.append(", ");
+            }
+        }
+        return stringBuilder.toString();
     }
 
     public SetType determineSetType() {

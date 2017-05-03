@@ -94,7 +94,7 @@ class NumberGame {
 
             // Display sets "on table"
             System.out.println("Tiles currently on table:");
-            printList(sets, true); // TODO: Create toString method
+            printList(sets, true);
             System.out.println();
 
             // Display current player's tiles
