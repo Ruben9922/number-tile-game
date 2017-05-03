@@ -104,8 +104,8 @@ class NumberGame {
         }
     }
 
-    public static <E> void printList(List<E> tiles, boolean showIndices) {
-        ListIterator<E> listIterator = tiles.listIterator();
+    public static <E> void printList(List<E> list, boolean showIndices) {
+        ListIterator<E> listIterator = list.listIterator();
         while (listIterator.hasNext()) {
             E element = listIterator.next();
             int index = listIterator.nextIndex();
