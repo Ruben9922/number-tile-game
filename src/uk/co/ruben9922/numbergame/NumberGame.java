@@ -93,18 +93,26 @@ class NumberGame {
             System.out.format("%s's Turn\n", player.getName());
 
             // Display sets "on table"
-            System.out.println("Tiles currently on table:");
-            printList(sets, true);
+            displayTableTiles();
             System.out.println();
 
             // Display current player's tiles
-            System.out.println("Tiles:");
-            printList(player.getTiles(), true);
+            displayPlayerTiles(player);
             System.out.println();
         }
     }
 
-    public static <E> void printList(List<E> list, boolean showIndices) {
+    private void displayPlayerTiles(Player player) {
+        System.out.println("Tiles:");
+        printList(player.getTiles(), true);
+    }
+
+    private void displayTableTiles() {
+        System.out.println("Tiles currently on table:");
+        printList(sets, true);
+    }
+
+    private static <E> void printList(List<E> list, boolean showIndices) {
         ListIterator<E> listIterator = list.listIterator();
         while (listIterator.hasNext()) {
             E element = listIterator.next();
