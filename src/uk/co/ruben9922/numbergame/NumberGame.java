@@ -3,7 +3,12 @@ package uk.co.ruben9922.numbergame;
 import org.jetbrains.annotations.Nullable;
 import uk.co.ruben9922.utilities.consoleutilities.InputUtilities;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Random;
+import java.util.Scanner;
 
 class NumberGame {
     private List<Player> players = new LinkedList<>();
@@ -12,6 +17,18 @@ class NumberGame {
 
     public NumberGame() {
 
+    }
+
+    private static <E> void printList(List<E> list, boolean showIndices) {
+        ListIterator<E> listIterator = list.listIterator();
+        while (listIterator.hasNext()) {
+            E element = listIterator.next();
+            int index = listIterator.nextIndex();
+            if (showIndices) {
+                System.out.format("[%d] ", index);
+            }
+            System.out.format("%s\n", element.toString());
+        }
     }
 
     public void inputPlayers(Scanner scanner) {
@@ -103,24 +120,12 @@ class NumberGame {
     }
 
     private void displayPlayerTiles(Player player) {
-        System.out.println("Tiles:");
+        System.out.format("%s's tiles:\n", player.getName());
         printList(player.getTiles(), true);
     }
 
     private void displayTableTiles() {
         System.out.println("Tiles currently on table:");
         printList(sets, true);
-    }
-
-    private static <E> void printList(List<E> list, boolean showIndices) {
-        ListIterator<E> listIterator = list.listIterator();
-        while (listIterator.hasNext()) {
-            E element = listIterator.next();
-            int index = listIterator.nextIndex();
-            if (showIndices) {
-                System.out.format("[%d] ", index);
-            }
-            System.out.format("%s\n", element.toString());
-        }
     }
 }
