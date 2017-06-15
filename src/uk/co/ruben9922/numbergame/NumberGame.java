@@ -6,7 +6,6 @@ import uk.co.ruben9922.utilities.consoleutilities.InputUtilities;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,18 +16,6 @@ class NumberGame {
 
     public NumberGame() {
 
-    }
-
-    private static <E> void printList(List<E> list, boolean showIndices) {
-        ListIterator<E> listIterator = list.listIterator();
-        while (listIterator.hasNext()) {
-            E element = listIterator.next();
-            int index = listIterator.nextIndex();
-            if (showIndices) {
-                System.out.format("[%d] ", index);
-            }
-            System.out.format("%s\n", element.toString());
-        }
     }
 
     public void inputPlayers(Scanner scanner) {
@@ -110,22 +97,17 @@ class NumberGame {
             System.out.format("%s's Turn\n", player.getName());
 
             // Display sets "on table"
-            displayTableTiles();
+            printTableTiles();
             System.out.println();
 
             // Display current player's tiles
-            displayPlayerTiles(player);
+            player.printTiles();
             System.out.println();
         }
     }
 
-    private void displayPlayerTiles(Player player) {
-        System.out.format("%s's tiles:\n", player.getName());
-        printList(player.getTiles(), true);
-    }
-
-    private void displayTableTiles() {
+    private void printTableTiles() {
         System.out.println("Tiles currently on table:");
-        printList(sets, true);
+        ListUtilities.printList(sets, true);
     }
 }
