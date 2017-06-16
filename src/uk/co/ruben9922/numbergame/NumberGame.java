@@ -1,5 +1,6 @@
 package uk.co.ruben9922.numbergame;
 
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import uk.co.ruben9922.utilities.consoleutilities.InputUtilities;
 
@@ -40,6 +41,19 @@ class NumberGame {
         if (InputUtilities.inputOptionInt(scanner, new String[]{"From my tiles", "From an existing set"}) == 0) {
             return playerTiles;
         } else {
+            return chooseSet(scanner, sets).getTiles();
+        }
+    }
+
+    private static List<Tile> chooseDestinationTileList(Scanner scanner, @NotNull List<Set> sets) {
+        System.out.println("Choose whether to move a tile to a new or existing set");
+        if (InputUtilities.inputOptionInt(scanner, new String[]{"New set", "Existing set"}) == 0) {
+            // Create a new set, add it to set list and return its tile list
+            Set newSet = new Set();
+            sets.add(newSet); // Add new set to given set list
+            return newSet.getTiles();
+        } else {
+            // Choose an existing set
             return chooseSet(scanner, sets).getTiles();
         }
     }
@@ -153,7 +167,7 @@ class NumberGame {
             // Choose tile lists to move tiles from and to respectively
             // Choose from updatedSets as don't want to edit
             List<Tile> sourceTileList = chooseSourceTileList(scanner, updatedPlayerTiles, updatedSets);
-            List<Tile> destinationTileList = chooseSet(scanner, updatedSets).getTiles();
+            List<Tile> destinationTileList = chooseDestinationTileList(scanner, updatedSets);
             moveTile(scanner, sourceTileList, destinationTileList);
 
             valid = areAllSetsValid();
