@@ -89,6 +89,10 @@ class Set {
         return SetType.INVALID; // Set is long enough but is neither a run nor group
     }
 
+    public boolean isValid() {
+        return determineSetType() == SetType.INVALID;
+    }
+
     public enum SetType {
         INVALID, RUN, GROUP
     }

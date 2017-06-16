@@ -18,6 +18,6 @@ public class Main {
 
         numberGame.givePlayersTiles(random, 14);
 
-        numberGame.playGame();
+        numberGame.playGame(scanner);
     }
 }

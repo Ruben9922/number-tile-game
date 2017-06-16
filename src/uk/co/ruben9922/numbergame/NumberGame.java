@@ -11,11 +11,42 @@ import java.util.Scanner;
 
 class NumberGame {
     private List<Player> players = new LinkedList<>();
-    private List<Tile> tiles = new LinkedList<>(); // Tiles not yet given to a player
-    private List<Set> sets = new LinkedList<>();
+    private List<Tile> tiles = new LinkedList<>(); // Tiles not yet given to a player // TODO: Possibly change tile and set lists to array lists
+    private List<Set> sets = new LinkedList<>(); // TODO: Possibly change to use set rather than list
 
     public NumberGame() {
 
+    }
+
+    private static void moveTile(Scanner scanner, List<Tile> sourceTileList, List<Tile> destinationTileList) {
+        // Choose tile to move
+        System.out.println("Choose tile to move from source list");
+        int tileIndex = ListUtilities.chooseItem(scanner, sourceTileList, "Number of tile to move: ");
+        System.out.println();
+
+        // Remove selected tile
+        Tile tile = sourceTileList.remove(tileIndex);
+
+        // Choose position in destination list at which to insert tile
+        System.out.println("Choose position in destination list to insert tile at");
+        int tileInsertIndex = ListUtilities.chooseItem(scanner, destinationTileList, "Position to insert tile: ");
+
+        // Insert tile at selected position
+        destinationTileList.add(tileInsertIndex, tile);
+    }
+
+    private static List<Tile> chooseSourceTileList(Scanner scanner, List<Tile> playerTiles, List<Set> sets) {
+        System.out.println("Choose whether to move a tile from your tiles or from an existing set on the table:");
+        if (InputUtilities.inputOptionInt(scanner, new String[]{"From my tiles", "From an existing set"}) == 0) {
+            return playerTiles;
+        } else {
+            return chooseSet(scanner, sets).getTiles();
+        }
+    }
+
+    private static Set chooseSet(Scanner scanner, List<Set> sets) {
+        return sets.get(ListUtilities.chooseItem(scanner, sets,
+                String.format("Set number [%d..%d]: ", 0, sets.size() - 1)));
     }
 
     public void inputPlayers(Scanner scanner) {
@@ -77,14 +108,14 @@ class NumberGame {
         tiles.addAll(Arrays.asList(extraTiles));
     }
 
-    public void givePlayersTiles(Random random, int tileCount) {
+    public void givePlayersTiles(Random random, int tileCount) { // TODO: Rename
         System.out.format("Giving each player %d tiles...\n\n", tileCount);
         for (Player player : players) {
             givePlayerTiles(random, player, tiles, tileCount);
         }
     }
 
-    private void givePlayerTiles(Random random, Player player, List<Tile> tiles, int tileCount) {
+    private void givePlayerTiles(Random random, Player player, List<Tile> tiles, int tileCount) { // TODO: Make static or inline (?)
         for (int i = 0; i < tileCount; i++) {
             int index = random.nextInt(tiles.size());
             Tile tile = tiles.remove(index);
@@ -92,7 +123,7 @@ class NumberGame {
         }
     }
 
-    public void playGame() {
+    public void playGame(Scanner scanner) {
         for (Player player : players) {
             System.out.format("%s's Turn\n", player.getName());
 
@@ -103,11 +134,51 @@ class NumberGame {
             // Display current player's tiles
             player.printTiles();
             System.out.println();
+
+            // Edit sets
+            editSets(scanner, player);
         }
     }
 
     private void printTableTiles() {
         System.out.println("Tiles currently on table:");
         ListUtilities.printList(sets, true);
+    }
+
+    private void editSets(Scanner scanner, Player player) {
+        boolean valid;
+        List<Tile> updatedPlayerTiles = new LinkedList<>(player.getTiles());
+        List<Set> updatedSets = new LinkedList<>(sets);
+        do {
+            // Choose tile lists to move tiles from and to respectively
+            // Choose from updatedSets as don't want to edit
+            List<Tile> sourceTileList = chooseSourceTileList(scanner, updatedPlayerTiles, updatedSets);
+            List<Tile> destinationTileList = chooseSet(scanner, updatedSets).getTiles();
+            moveTile(scanner, sourceTileList, destinationTileList);
+
+            valid = areAllSetsValid();
+            if (valid) {
+                System.out.println("Sets are currently VALID");
+                System.out.println("Your changes will be SAVED if you choose not to continue editing sets");
+            } else {
+                System.out.println("Sets are currently INVALID");
+                System.out.println("Your changes will be LOST if you choose not to continue editing sets");
+            }
+        } while (InputUtilities.inputYOrN(scanner, "Continue editing sets? (y/n): "));
+
+        if (valid) {
+            // If resulting sets are valid, overwrite player tiles and sets
+            player.setTiles(updatedPlayerTiles);
+            sets = updatedSets;
+        }
+    }
+
+    private boolean areAllSetsValid() {
+        for (Set set : sets) {
+            if (!set.isValid()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

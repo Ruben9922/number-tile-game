@@ -24,6 +24,10 @@ class Player {
         return tiles;
     }
 
+    public void setTiles(List<Tile> tiles) {
+        this.tiles = tiles;
+    }
+
     public void printTiles() {
         System.out.format("%s's tiles:\n", name);
         ListUtilities.printList(tiles, true);
