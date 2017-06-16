@@ -49,16 +49,6 @@ class NumberGame {
                 String.format("Set number [%d..%d]: ", 0, sets.size() - 1)));
     }
 
-    @Nullable
-    private static String findMatchingPlayerName(List<Player> players, String playerName) {
-        for (Player player : players) {
-            if (playerName.toLowerCase().equals(player.getName().toLowerCase())) { // Ignoring case
-                return player.getName();
-            }
-        }
-        return null;
-    }
-
     private static void givePlayerTiles(Random random, Player player, List<Tile> tiles, int tileCount) {
         for (int i = 0; i < tileCount; i++) {
             int index = random.nextInt(tiles.size());
@@ -73,32 +63,42 @@ class NumberGame {
         scanner.nextLine();
 
         for (int i = 0; i < PLAYER_COUNT; i++) {
-            String playerName = inputPlayerName(scanner, players);
+            String playerName = inputPlayerName(scanner);
             players.add(new Player(playerName));
             System.out.format("Player \"%s\" added.\n\n", playerName);
         }
     }
 
-    private String inputPlayerName(Scanner scanner, List<Player> existingPlayers) {
+    private String inputPlayerName(Scanner scanner) {
         String playerName;
         boolean unique;
         do {
-            System.out.format("Player %1$d's name (leave blank for \"Player %1$d\"): ", existingPlayers.size() + 1);
+            System.out.format("Player %1$d's name (leave blank for \"Player %1$d\"): ", players.size() + 1);
             playerName = scanner.nextLine().trim();
 
             // Implementing the "leave blank for ..." from prompt above
             if (playerName.isEmpty()) {
-                playerName = "Player " + (existingPlayers.size() + 1);
+                playerName = "Player " + (players.size() + 1);
             }
 
             // Check for uniqueness
-            String existingPlayerName = findMatchingPlayerName(existingPlayers, playerName);
+            String existingPlayerName = findMatchingPlayerName(playerName);
             unique = (existingPlayerName == null);
             if (!unique) {
                 System.out.format("The name %s is already taken! Enter a different name.\n", existingPlayerName); // Might move this later
             }
         } while (!unique);
         return playerName;
+    }
+
+    @Nullable
+    private String findMatchingPlayerName(String playerName) {
+        for (Player player : players) {
+            if (playerName.toLowerCase().equals(player.getName().toLowerCase())) { // Ignoring case
+                return player.getName();
+            }
+        }
+        return null;
     }
 
     // minTileNumber and maxTileNumber are both inclusive
