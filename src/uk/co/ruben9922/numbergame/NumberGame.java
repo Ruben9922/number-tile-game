@@ -37,7 +37,7 @@ class NumberGame {
     }
 
     private static List<Tile> chooseSourceTileList(Scanner scanner, List<Set> sets, List<Tile> playerTiles) {
-        System.out.println("Choose whether to move a tile from your tiles or from an existing set on the table:");
+        System.out.println("Choose whether to move a tile from your tiles or from an existing set on the table");
         if (InputUtilities.inputOptionInt(scanner, new String[]{"From my tiles", "From an existing set"}) == 0) {
             return playerTiles;
         } else {
