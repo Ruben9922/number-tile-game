@@ -16,7 +16,7 @@ public class Main {
 
         numberGame.generateTiles(2, 1, 13, new SmileyTile(Tile.Colour.BLACK), new SmileyTile(Tile.Colour.ORANGE));
 
-        numberGame.givePlayersTiles(random, 14);
+        numberGame.giveAllPlayersTiles(random, 14);
 
         numberGame.playGame(scanner);
     }

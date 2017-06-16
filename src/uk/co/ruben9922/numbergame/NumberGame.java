@@ -49,6 +49,24 @@ class NumberGame {
                 String.format("Set number [%d..%d]: ", 0, sets.size() - 1)));
     }
 
+    @Nullable
+    private static String findMatchingPlayerName(List<Player> players, String playerName) {
+        for (Player player : players) {
+            if (playerName.toLowerCase().equals(player.getName().toLowerCase())) { // Ignoring case
+                return player.getName();
+            }
+        }
+        return null;
+    }
+
+    private static void givePlayerTiles(Random random, Player player, List<Tile> tiles, int tileCount) {
+        for (int i = 0; i < tileCount; i++) {
+            int index = random.nextInt(tiles.size());
+            Tile tile = tiles.remove(index);
+            player.getTiles().add(tile);
+        }
+    }
+
     public void inputPlayers(Scanner scanner) {
         // Input number of players
         final int PLAYER_COUNT = InputUtilities.inputInt(scanner, "Number of players: ", 0, null);
@@ -83,16 +101,6 @@ class NumberGame {
         return playerName;
     }
 
-    @Nullable
-    private String findMatchingPlayerName(List<Player> existingPlayers, String playerName) {
-        for (Player player : existingPlayers) {
-            if (playerName.toLowerCase().equals(player.getName().toLowerCase())) { // Ignoring case
-                return player.getName();
-            }
-        }
-        return null;
-    }
-
     // minTileNumber and maxTileNumber are both inclusive
     public void generateTiles(int numberTileCopies, int minTileNumber, int maxTileNumber, Tile... extraTiles) {
         // Add given number of copies of each colour of each number tile between the given minimum and maximum (incl.)
@@ -108,18 +116,10 @@ class NumberGame {
         tiles.addAll(Arrays.asList(extraTiles));
     }
 
-    public void givePlayersTiles(Random random, int tileCount) { // TODO: Rename
+    public void giveAllPlayersTiles(Random random, int tileCount) {
         System.out.format("Giving each player %d tiles...\n\n", tileCount);
         for (Player player : players) {
             givePlayerTiles(random, player, tiles, tileCount);
-        }
-    }
-
-    private void givePlayerTiles(Random random, Player player, List<Tile> tiles, int tileCount) { // TODO: Make static or inline (?)
-        for (int i = 0; i < tileCount; i++) {
-            int index = random.nextInt(tiles.size());
-            Tile tile = tiles.remove(index);
-            player.getTiles().add(tile);
         }
     }
 
