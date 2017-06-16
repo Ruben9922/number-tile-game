@@ -36,7 +36,7 @@ class NumberGame {
         destinationTileList.add(tileInsertIndex, tile);
     }
 
-    private static List<Tile> chooseSourceTileList(Scanner scanner, List<Tile> playerTiles, List<Set> sets) {
+    private static List<Tile> chooseSourceTileList(Scanner scanner, List<Set> sets, List<Tile> playerTiles) {
         System.out.println("Choose whether to move a tile from your tiles or from an existing set on the table:");
         if (InputUtilities.inputOptionInt(scanner, new String[]{"From my tiles", "From an existing set"}) == 0) {
             return playerTiles;
@@ -166,7 +166,7 @@ class NumberGame {
         do {
             // Choose tile lists to move tiles from and to respectively
             // Choose from updatedSets as don't want to edit
-            List<Tile> sourceTileList = chooseSourceTileList(scanner, updatedPlayerTiles, updatedSets);
+            List<Tile> sourceTileList = chooseSourceTileList(scanner, updatedSets, updatedPlayerTiles);
             List<Tile> destinationTileList = chooseDestinationTileList(scanner, updatedSets);
             moveTile(scanner, sourceTileList, destinationTileList);
 
