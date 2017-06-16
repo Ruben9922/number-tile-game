@@ -36,28 +36,34 @@ class NumberGame {
         destinationTileList.add(tileInsertIndex, tile);
     }
 
-    private static List<Tile> chooseSourceTileList(Scanner scanner, List<Set> sets, List<Tile> playerTiles) {
-        System.out.println("Choose whether to move a tile from your tiles or from an existing set on the table");
-        int option = InputUtilities.inputOptionInt(scanner, new String[] {"From my tiles", "From an existing set"});
-        if (option == 0) {
-            return playerTiles;
-        } else {
-            return chooseSet(scanner, sets).getTiles();
+    private static List<Tile> chooseSourceTileList(Scanner scanner, @NotNull List<Set> sets, List<Tile> playerTiles) {
+        // If there are no sets on table then source tile list must be player's tiles
+        // If there are sets on table then allow player to choose between their own tiles and existing set on table
+        if (sets.size() != 0) {
+            System.out.println("Choose whether to move a tile from your tiles or from an existing set on the table");
+            int option = InputUtilities.inputOptionInt(scanner, new String[] {"From my tiles", "From an existing set"});
+            if (option != 0) {
+                return chooseSet(scanner, sets).getTiles();
+            }
         }
+        return playerTiles;
     }
 
     private static List<Tile> chooseDestinationTileList(Scanner scanner, @NotNull List<Set> sets) {
-        System.out.println("Choose whether to move a tile to a new or existing set");
-        int option = InputUtilities.inputOptionInt(scanner, new String[] {"New set", "Existing set"});
-        if (option == 0) {
-            // Create a new set, add it to set list and return its tile list
-            Set newSet = new Set();
-            sets.add(newSet); // Add new set to given set list
-            return newSet.getTiles();
-        } else {
-            // Choose an existing set
-            return chooseSet(scanner, sets).getTiles();
+        // If there are no sets on table then destination tile list must be that of a NEW set
+        // If there are sets on table then allow player to choose between using a NEW or EXISTING set
+        if (sets.size() != 0) {
+            System.out.println("Choose whether to move a tile to a new or existing set");
+            int option = InputUtilities.inputOptionInt(scanner, new String[] {"New set", "Existing set"});
+            if (option != 0) {
+                // Choose an existing set
+                return chooseSet(scanner, sets).getTiles();
+            }
         }
+        // Create a new set, add it to set list and return its tile list
+        Set newSet = new Set();
+        sets.add(newSet); // Add new set to given set list
+        return newSet.getTiles();
     }
 
     private static Set chooseSet(Scanner scanner, List<Set> sets) {
