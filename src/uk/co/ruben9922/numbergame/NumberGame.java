@@ -38,7 +38,8 @@ class NumberGame {
 
     private static List<Tile> chooseSourceTileList(Scanner scanner, List<Set> sets, List<Tile> playerTiles) {
         System.out.println("Choose whether to move a tile from your tiles or from an existing set on the table");
-        if (InputUtilities.inputOptionInt(scanner, new String[]{"From my tiles", "From an existing set"}) == 0) {
+        int option = InputUtilities.inputOptionInt(scanner, new String[] {"From my tiles", "From an existing set"});
+        if (option == 0) {
             return playerTiles;
         } else {
             return chooseSet(scanner, sets).getTiles();
@@ -47,7 +48,8 @@ class NumberGame {
 
     private static List<Tile> chooseDestinationTileList(Scanner scanner, @NotNull List<Set> sets) {
         System.out.println("Choose whether to move a tile to a new or existing set");
-        if (InputUtilities.inputOptionInt(scanner, new String[]{"New set", "Existing set"}) == 0) {
+        int option = InputUtilities.inputOptionInt(scanner, new String[] {"New set", "Existing set"});
+        if (option == 0) {
             // Create a new set, add it to set list and return its tile list
             Set newSet = new Set();
             sets.add(newSet); // Add new set to given set list
