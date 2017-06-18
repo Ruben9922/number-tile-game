@@ -12,8 +12,8 @@ public class ListUtilities {
     public static <E> void printList(List<E> list, boolean showIndices) {
         ListIterator<E> listIterator = list.listIterator();
         while (listIterator.hasNext()) {
-            E element = listIterator.next();
             int index = listIterator.nextIndex();
+            E element = listIterator.next();
             if (showIndices) {
                 System.out.format("[%d] ", index);
             }
