@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+// TODO: Sort out messages
+// TODO: Make tile lists sorted
+// TODO: Remove separate "step" of choosing between new and existing sets
+// TODO: Display destination tile list
 class NumberGame {
     private List<Player> players = new LinkedList<>();
     private List<Tile> tiles = new LinkedList<>(); // Tiles not yet given to a player // TODO: Possibly change tile and set lists to array lists
@@ -19,36 +23,53 @@ class NumberGame {
 
     }
 
-    private static void moveTile(Scanner scanner, List<Tile> sourceTileList, List<Tile> destinationTileList) {
+    private static void moveTile(Scanner scanner, @NotNull List<Tile> sourceTileList,
+                                 @NotNull List<Tile> destinationTileList) {
         // Choose tile to move
         System.out.println("Choose tile to move from source list");
-        int tileIndex = ListUtilities.chooseItem(scanner, sourceTileList, "Number of tile to move: ");
+        Integer tileIndex = ListUtilities.chooseItem(scanner, sourceTileList, "Number of tile to move: ");
+
+        if (tileIndex == null) { // Null check
+            // Should never be reached as chooseItem would only return null if sourceList is empty, but calling code
+            // should only ever provide a non-empty source list
+            return;
+        }
+
         System.out.println();
 
         // Remove selected tile
-        Tile tile = sourceTileList.remove(tileIndex);
+        Tile tile = sourceTileList.remove(tileIndex.intValue());
 
         // Choose position in destination list at which to insert tile
         System.out.println("Choose position in destination list to insert tile at");
-        int tileInsertIndex = ListUtilities.chooseItem(scanner, destinationTileList, "Position to insert tile: ");
+        Integer tileInsertIndex = ListUtilities.chooseItem(scanner, destinationTileList, "Position to insert tile: ");
+
+        if (tileInsertIndex == null) { // Null check
+            tileInsertIndex = 0;
+        }
 
         // Insert tile at selected position
         destinationTileList.add(tileInsertIndex, tile);
     }
 
-    private static List<Tile> chooseSourceTileList(Scanner scanner, @NotNull List<Set> sets, List<Tile> playerTiles) {
+    @NotNull
+    private static List<Tile> chooseSourceTileList(Scanner scanner, @NotNull List<Set> sets,
+                                                   @NotNull List<Tile> playerTiles) {
         // If there are no sets on table then source tile list must be player's tiles
         // If there are sets on table then allow player to choose between their own tiles and existing set on table
         if (sets.size() != 0) {
             System.out.println("Choose whether to move a tile from your tiles or from an existing set on the table");
             int option = InputUtilities.inputOptionInt(scanner, new String[] {"From my tiles", "From an existing set"});
             if (option != 0) {
-                return chooseSet(scanner, sets).getTiles();
+                // Choose an existing set
+                Set set = chooseSet(scanner, sets);
+                if (set != null) return set.getTiles();
             }
         }
         return playerTiles;
     }
 
+    @NotNull
     private static List<Tile> chooseDestinationTileList(Scanner scanner, @NotNull List<Set> sets) {
         // If there are no sets on table then destination tile list must be that of a NEW set
         // If there are sets on table then allow player to choose between using a NEW or EXISTING set
@@ -57,18 +78,27 @@ class NumberGame {
             int option = InputUtilities.inputOptionInt(scanner, new String[] {"New set", "Existing set"});
             if (option != 0) {
                 // Choose an existing set
-                return chooseSet(scanner, sets).getTiles();
+                Set set = chooseSet(scanner, sets);
+                if (set != null) return set.getTiles();
             }
         }
+
         // Create a new set, add it to set list and return its tile list
         Set newSet = new Set();
         sets.add(newSet); // Add new set to given set list
         return newSet.getTiles();
     }
 
-    private static Set chooseSet(Scanner scanner, List<Set> sets) {
-        return sets.get(ListUtilities.chooseItem(scanner, sets,
-                String.format("Set number [%d..%d]: ", 0, sets.size() - 1)));
+    @Nullable
+    private static Set chooseSet(Scanner scanner, @NotNull List<Set> sets) {
+        Integer index = ListUtilities.chooseItem(scanner, sets,
+                String.format("Set number [%d..%d]: ", 0, sets.size() - 1));
+
+        if (index == null) { // Null check
+            return null;
+        }
+
+        return sets.get(index);
     }
 
     private static void givePlayerTiles(Random random, Player player, List<Tile> tiles, int tileCount) {
@@ -186,7 +216,7 @@ class NumberGame {
                 System.out.println("Sets are currently INVALID");
                 System.out.println("Your changes will be LOST if you choose not to continue editing sets");
             }
-        } while (InputUtilities.inputYOrN(scanner, "Continue editing sets? (y/n): "));
+        } while (InputUtilities.inputYOrN(scanner, "Continue editing sets? (y/n): ")); // TODO: Fix this
 
         if (valid) {
             // If resulting sets are valid, overwrite player tiles and sets
