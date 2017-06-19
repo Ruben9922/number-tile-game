@@ -27,9 +27,9 @@ class NumberGame {
                                  @NotNull List<Tile> destinationTileList) {
         // Choose tile to move
         System.out.println("Choose tile to move from source list");
-        Integer tileIndex = ListUtilities.chooseItem(scanner, sourceTileList, "Number of tile to move: ");
+        Integer tileRemoveIndex = ListUtilities.chooseItem(scanner, sourceTileList, "Number of tile to move: ");
 
-        if (tileIndex == null) { // Null check
+        if (tileRemoveIndex == null) { // Null check
             // Should never be reached as chooseItem would only return null if sourceList is empty, but calling code
             // should only ever provide a non-empty source list
             return;
@@ -38,7 +38,7 @@ class NumberGame {
         System.out.println();
 
         // Remove selected tile
-        Tile tile = sourceTileList.remove(tileIndex.intValue());
+        Tile tile = sourceTileList.remove(tileRemoveIndex.intValue());
 
         // Choose position in destination list at which to insert tile
         System.out.println("Choose position in destination list to insert tile at");
