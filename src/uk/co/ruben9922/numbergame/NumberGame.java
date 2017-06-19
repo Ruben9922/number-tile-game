@@ -125,12 +125,13 @@ class NumberGame {
         String playerName;
         boolean unique;
         do {
-            System.out.format("Player %1$d's name (leave blank for \"Player %1$d\"): ", players.size() + 1);
+            String defaultPlayerName = "Player " + (players.size() + 1);
+            System.out.format("Player %d's name (leave blank for \"%s\"): ", players.size() + 1, defaultPlayerName);
             playerName = scanner.nextLine().trim();
 
             // Implementing the "leave blank for ..." from prompt above
             if (playerName.isEmpty()) {
-                playerName = "Player " + (players.size() + 1);
+                playerName = defaultPlayerName;
             }
 
             // Check for uniqueness
