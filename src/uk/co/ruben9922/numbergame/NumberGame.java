@@ -122,26 +122,26 @@ class NumberGame {
     }
 
     private String inputPlayerName(Scanner scanner) {
-        String playerName;
+        String name;
         boolean unique;
         do {
-            String defaultPlayerName = "Player " + (players.size() + 1);
-            System.out.format("Player %d's name (leave blank for \"%s\"): ", players.size() + 1, defaultPlayerName);
-            playerName = scanner.nextLine().trim();
+            String defaultName = "Player " + (players.size() + 1);
+            System.out.format("Player %d's name (leave blank for \"%s\"): ", players.size() + 1, defaultName);
+            name = scanner.nextLine().trim();
 
             // Implementing the "leave blank for ..." from prompt above
-            if (playerName.isEmpty()) {
-                playerName = defaultPlayerName;
+            if (name.isEmpty()) {
+                name = defaultName;
             }
 
             // Check for uniqueness
-            String existingPlayerName = findMatchingPlayerName(playerName);
+            String existingPlayerName = findMatchingPlayerName(name);
             unique = (existingPlayerName == null);
             if (!unique) {
                 System.out.format("The name %s is already taken! Enter a different name.\n", existingPlayerName); // Might move this later
             }
         } while (!unique);
-        return playerName;
+        return name;
     }
 
     @Nullable
