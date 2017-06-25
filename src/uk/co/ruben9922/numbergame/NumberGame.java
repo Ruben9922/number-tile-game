@@ -27,7 +27,8 @@ class NumberGame {
                                  @NotNull List<Tile> destinationTileList) {
         // Choose tile to move
         System.out.println("Choose tile to move from source list");
-        Integer tileRemoveIndex = ListUtilities.chooseItem(scanner, sourceTileList, "Number of tile to move: ");
+        Integer tileRemoveIndex = ListUtilities.chooseItem(scanner, sourceTileList, "source list", "tile", "Number of tile to move: "
+        );
 
         if (tileRemoveIndex == null) { // Null check
             // Should never be reached as chooseItem would only return null if sourceList is empty, but calling code
@@ -42,7 +43,8 @@ class NumberGame {
 
         // Choose position in destination list at which to insert tile
         System.out.println("Choose position in destination list to insert tile at");
-        Integer tileInsertIndex = ListUtilities.chooseItem(scanner, destinationTileList, "Position to insert tile: ");
+        Integer tileInsertIndex = ListUtilities.chooseItem(scanner, destinationTileList, "destination list", "tile", "Position to insert tile: "
+        );
 
         if (tileInsertIndex == null) { // Null check
             tileInsertIndex = 0;
@@ -92,7 +94,7 @@ class NumberGame {
     @Nullable
     private static Set chooseSet(Scanner scanner, @NotNull List<Set> sets) {
         Integer index = ListUtilities.chooseItem(scanner, sets,
-                String.format("Set number [%d..%d]: ", 0, sets.size() - 1));
+                "sets", "set", String.format("Set number [%d..%d]: ", 0, sets.size() - 1));
 
         if (index == null) { // Null check
             return null;
