@@ -9,7 +9,7 @@ namespace NumberTileGame
         public static void Main(string[] args)
         {
             Game game = new Game();
-            game.Play();
+            game.InputPlayerNames();
         }
     }
 
@@ -29,7 +29,7 @@ namespace NumberTileGame
 
         private IList<Player> players = new Player[PlayerCount];
 
-        internal void Play()
+        internal void InputPlayerNames()
         {
             for (int i = 0; i < PlayerCount; i++)
             {
