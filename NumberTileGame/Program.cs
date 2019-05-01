@@ -11,7 +11,7 @@ namespace NumberTileGame
 
             for (int i = 0; i < playerCount; i++)
             {
-                Console.WriteLine($"Name of Player {i + 1} [Player {i + 1}]: ");
+                Console.Write($"Name of Player {i + 1} [Player {i + 1}]: ");
                 string playerName = Console.ReadLine();
                 if (playerName == "")
                 {
