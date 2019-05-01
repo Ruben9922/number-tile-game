@@ -6,20 +6,8 @@ namespace NumberTileGame
     {
         public static void Main(string[] args)
         {
-            const int playerCount = 2;
-            Player[] players = new Player[playerCount];
-
-            for (int i = 0; i < playerCount; i++)
-            {
-                Console.Write($"Name of Player {i + 1} [Player {i + 1}]: ");
-                string playerName = Console.ReadLine();
-                if (playerName == "")
-                {
-                    playerName = $"Player {i + 1}";
-                }
-
-                players[i] = new Player(playerName);
-            }
+            Game game = new Game();
+            game.Play();
         }
     }
 
@@ -30,6 +18,28 @@ namespace NumberTileGame
         public Player(string playerName)
         {
             PlayerName = playerName;
+        }
+    }
+
+    internal class Game
+    {
+        private const int PlayerCount = 2;
+
+        private Player[] players = new Player[PlayerCount];
+
+        internal void Play()
+        {
+            for (int i = 0; i < PlayerCount; i++)
+            {
+                Console.Write($"Name of Player {i + 1} [Player {i + 1}]: ");
+                string playerName = Console.ReadLine();
+                if (playerName == "")
+                {
+                    playerName = $"Player {i + 1}";
+                }
+
+                players[i] = new Player(playerName);
+            }
         }
     }
 }
