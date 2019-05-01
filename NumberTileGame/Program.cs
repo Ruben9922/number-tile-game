@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NumberTileGame
 {
@@ -13,11 +15,11 @@ namespace NumberTileGame
 
     internal class Player
     {
-        private string PlayerName { get; set; }
+        internal string Name { get; set; }
 
-        public Player(string playerName)
+        public Player(string name)
         {
-            PlayerName = playerName;
+            Name = name;
         }
     }
 
@@ -25,21 +27,30 @@ namespace NumberTileGame
     {
         private const int PlayerCount = 2;
 
-        private Player[] players = new Player[PlayerCount];
+        private IList<Player> players = new Player[PlayerCount];
 
         internal void Play()
         {
             for (int i = 0; i < PlayerCount; i++)
             {
-                Console.Write($"Name of Player {i + 1} [Player {i + 1}]: ");
-                string playerName = Console.ReadLine();
-                if (playerName == "")
+                string playerName;
+                do
                 {
-                    playerName = $"Player {i + 1}";
-                }
+                    Console.Write($"Name of Player {i + 1} [Player {i + 1}]: ");
+                    playerName = Console.ReadLine();
+                    if (playerName == "")
+                    {
+                        playerName = $"Player {i + 1}";
+                    }
+                } while (!CheckPlayerNameDistinctness());
 
                 players[i] = new Player(playerName);
             }
+        }
+
+        private bool CheckPlayerNameDistinctness()
+        {
+            return players.Select(player => player.Name.ToLower()).Distinct().Count() == players.Count;
         }
     }
 }
