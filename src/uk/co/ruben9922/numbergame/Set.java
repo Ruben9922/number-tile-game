@@ -1,18 +1,21 @@
 package uk.co.ruben9922.numbergame;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
 class Set {
+    @NotNull
     private List<Tile> tiles;
 
     public Set() {
         this.tiles = new LinkedList<>();
     }
 
-    public Set(List<Tile> tiles) {
+    public Set(@NotNull List<Tile> tiles) {
         this.tiles = tiles;
     }
 
