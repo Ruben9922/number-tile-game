@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -52,5 +52,46 @@ namespace NumberTileGame
         {
             return players.Select(player => player.Name.ToLower()).Distinct().Count() == players.Count;
         }
+    }
+
+    internal abstract class Tile
+    {
+        public Colour Colour { get; set; }
+
+        protected Tile(Colour colour)
+        {
+            Colour = colour;
+        }
+    }
+
+    internal class NumberTile : Tile
+    {
+        public int Number { get; set; }
+
+        public NumberTile(Colour colour, int number) : base(colour)
+        {
+            Number = number;
+        }
+    }
+
+    internal class SmileyTile : Tile
+    {
+        public SmileyTile(Colour colour) : base(colour)
+        {
+        }
+    }
+
+    internal enum Colour
+    {
+        Black,
+        Blue,
+        Orange,
+        Red
+    }
+
+    internal enum TileType
+    {
+        Number,
+        Smiley
     }
 }
