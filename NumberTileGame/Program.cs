@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -27,7 +28,7 @@ namespace NumberTileGame
     {
         private const int PlayerCount = 2;
 
-        private IList<Player> players = new Player[PlayerCount];
+        private IList<Player> players = new List<Player>(PlayerCount);
 
         internal void InputPlayerNames()
         {
@@ -44,7 +45,7 @@ namespace NumberTileGame
                     }
                 } while (!CheckPlayerNameDistinctness());
 
-                players[i] = new Player(playerName);
+                players.Add(new Player(playerName));
             }
         }
 
