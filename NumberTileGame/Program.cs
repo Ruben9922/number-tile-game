@@ -35,6 +35,7 @@ namespace NumberTileGame
             for (int i = 0; i < PlayerCount; i++)
             {
                 string playerName;
+                bool distinct;
                 do
                 {
                     Console.Write($"Name of Player {i + 1} [Player {i + 1}]: ");
@@ -43,7 +44,13 @@ namespace NumberTileGame
                     {
                         playerName = $"Player {i + 1}";
                     }
-                } while (!CheckPlayerNameDistinctness(playerName));
+                    
+                    distinct = CheckPlayerNameDistinctness(playerName);
+                    if (!distinct)
+                    {
+                        Console.WriteLine("Player name already exists (note that this is case-insensitive)");
+                    }
+                } while (!distinct);
 
                 players.Add(new Player(playerName));
                 Console.WriteLine($"{playerName} added");
