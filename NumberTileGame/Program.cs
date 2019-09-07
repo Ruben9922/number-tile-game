@@ -43,15 +43,19 @@ namespace NumberTileGame
                     {
                         playerName = $"Player {i + 1}";
                     }
-                } while (!CheckPlayerNameDistinctness());
+                } while (!CheckPlayerNameDistinctness(playerName));
 
                 players.Add(new Player(playerName));
+                Console.WriteLine($"{playerName} added");
             }
         }
 
-        private bool CheckPlayerNameDistinctness()
+        private bool CheckPlayerNameDistinctness(string playerName)
         {
-            return players.Select(player => player.Name.ToLower()).Distinct().Count() == players.Count;
+            IList<string> playerNames = players.Select(player => player.Name.ToLower()).ToList();
+            playerNames.Add(playerName.ToLower());
+            Console.WriteLine(playerNames.Distinct().Count());
+            return playerNames.Distinct().Count() == playerNames.Count;
         }
     }
 
