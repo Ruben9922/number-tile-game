@@ -17,7 +17,7 @@ namespace NumberTileGame
             GenerateTiles();
         }
 
-        internal void InputPlayerNames()
+        private void InputPlayerNames()
         {
             for (int i = 0; i < PlayerCount; i++)
             {
@@ -44,7 +44,7 @@ namespace NumberTileGame
             }
         }
 
-        internal void GenerateTiles()
+        private void GenerateTiles()
         {
             // Generate number tiles
             for (int i = NumberTile.MinValue; i <= NumberTile.MaxValue; i++) // For each number
