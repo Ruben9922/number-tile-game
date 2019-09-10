@@ -8,6 +8,7 @@ namespace NumberTileGame
         {
             Game game = new Game();
             game.InputPlayerNames();
+            game.GenerateTiles();
         }
     }
 }

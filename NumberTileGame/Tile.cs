@@ -8,5 +8,10 @@ namespace NumberTileGame
         {
             Colour = colour;
         }
+
+        public override string ToString()
+        {
+            return $"NumberTileGame.Tile(Colour={Colour})";
+        }
     }
 }

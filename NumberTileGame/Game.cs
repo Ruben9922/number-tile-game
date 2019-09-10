@@ -9,6 +9,7 @@ namespace NumberTileGame
         private const int PlayerCount = 2;
 
         private IList<Player> players = new List<Player>(PlayerCount);
+        private IList<Tile> tiles = new List<Tile>(((NumberTile.MaxValue - NumberTile.MinValue + 1) * 8) + 2);
 
         internal void InputPlayerNames()
         {
@@ -34,6 +35,27 @@ namespace NumberTileGame
 
                 players.Add(new Player(playerName));
                 Console.WriteLine($"{playerName} added");
+            }
+        }
+
+        internal void GenerateTiles()
+        {
+            // Generate number tiles
+            for (int i = NumberTile.MinValue; i <= NumberTile.MaxValue; i++)
+            {
+                foreach (Colour colour in (Colour[]) Enum.GetValues(typeof(Colour)))
+                {
+                    tiles.Add(new NumberTile(colour, i));
+                }
+            }
+            
+            // Generate smiley tiles
+            tiles.Add(new SmileyTile(Colour.Black));
+            tiles.Add(new SmileyTile(Colour.Orange));
+
+            foreach (Tile tile in tiles)
+            {
+                Console.WriteLine(tile);
             }
         }
 

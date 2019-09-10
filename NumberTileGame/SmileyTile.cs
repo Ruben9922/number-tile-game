@@ -5,5 +5,10 @@ namespace NumberTileGame
         public SmileyTile(Colour colour) : base(colour)
         {
         }
+
+        public override string ToString()
+        {
+            return $"NumberTileGame.SmileyTile(Colour={Colour})";
+        }
     }
 }
