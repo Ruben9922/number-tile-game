@@ -45,7 +45,10 @@ namespace NumberTileGame
             {
                 foreach (Colour colour in (Colour[]) Enum.GetValues(typeof(Colour)))
                 {
-                    tiles.Add(new NumberTile(colour, i));
+                    for (int j = 0; j < 2; j++)
+                    {
+                        tiles.Add(new NumberTile(colour, i));
+                    }
                 }
             }
             
