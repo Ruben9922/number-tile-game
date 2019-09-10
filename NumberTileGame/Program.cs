@@ -7,8 +7,7 @@ namespace NumberTileGame
         public static void Main(string[] args)
         {
             Game game = new Game();
-            game.InputPlayerNames();
-            game.GenerateTiles();
+            game.Play();
         }
     }
 }

@@ -11,6 +11,12 @@ namespace NumberTileGame
         private IList<Player> players = new List<Player>(PlayerCount);
         private IList<Tile> tiles = new List<Tile>(((NumberTile.MaxValue - NumberTile.MinValue + 1) * 8) + 2);
 
+        public void Play()
+        {
+            InputPlayerNames();
+            GenerateTiles();
+        }
+
         internal void InputPlayerNames()
         {
             for (int i = 0; i < PlayerCount; i++)
