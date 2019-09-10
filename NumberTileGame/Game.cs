@@ -41,11 +41,11 @@ namespace NumberTileGame
         internal void GenerateTiles()
         {
             // Generate number tiles
-            for (int i = NumberTile.MinValue; i <= NumberTile.MaxValue; i++)
+            for (int i = NumberTile.MinValue; i <= NumberTile.MaxValue; i++) // For each number
             {
-                foreach (Colour colour in (Colour[]) Enum.GetValues(typeof(Colour)))
+                foreach (Colour colour in (Colour[]) Enum.GetValues(typeof(Colour))) // For each colour
                 {
-                    for (int j = 0; j < 2; j++)
+                    for (int j = 0; j < 2; j++) // For each of two copies
                     {
                         tiles.Add(new NumberTile(colour, i));
                     }
