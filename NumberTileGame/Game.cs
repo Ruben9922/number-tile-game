@@ -10,11 +10,13 @@ namespace NumberTileGame
 
         private IList<Player> players = new List<Player>(PlayerCount);
         private IList<Tile> tiles = new List<Tile>(((NumberTile.MaxValue - NumberTile.MinValue + 1) * 8) + 2);
+        private Random random = new Random();
 
         public void Play()
         {
             InputPlayerNames();
             GenerateTiles();
+            GivePlayersTiles();
         }
 
         private void InputPlayerNames()
@@ -68,12 +70,31 @@ namespace NumberTileGame
             }
         }
 
+        private void GivePlayersTiles()
+        {
+            foreach (Player player in players)
+            {
+                for (int i = 0; i < Player.TileCount; i++)
+                {
+                    GivePlayerTile(player);
+                }
+            }
+        }
+
         private bool CheckPlayerNameDistinctness(string playerName)
         {
             IList<string> playerNames = players.Select(player => player.Name.ToLower()).ToList();
             playerNames.Add(playerName.ToLower());
             Console.WriteLine(playerNames.Distinct().Count());
             return playerNames.Distinct().Count() == playerNames.Count;
+        }
+
+        private void GivePlayerTile(Player player)
+        {
+            int index = random.Next(tiles.Count);
+            Tile tile = tiles[index];
+            player.Tiles.Add(tile);
+            tiles.RemoveAt(index);
         }
     }
 }
