@@ -63,11 +63,6 @@ namespace NumberTileGame
             // Generate smiley tiles
             tiles.Add(new SmileyTile(Colour.Black));
             tiles.Add(new SmileyTile(Colour.Orange));
-
-            foreach (Tile tile in tiles)
-            {
-                Console.WriteLine(tile);
-            }
         }
 
         private void GivePlayersTiles()
