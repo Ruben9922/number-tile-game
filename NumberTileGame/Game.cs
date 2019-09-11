@@ -35,7 +35,7 @@ namespace NumberTileGame
                     {
                         playerName = $"Player {i + 1}";
                     }
-                    
+
                     distinct = CheckPlayerNameDistinctness(playerName);
                     if (!distinct)
                     {
@@ -61,7 +61,7 @@ namespace NumberTileGame
                     }
                 }
             }
-            
+
             // Generate smiley tiles
             tiles.Add(new SmileyTile(Colour.Black));
             tiles.Add(new SmileyTile(Colour.Orange));
@@ -89,22 +89,23 @@ namespace NumberTileGame
             Console.WriteLine("Your tiles:");
             Console.WriteLine(player.Tiles.ToHumanReadableString());
             Console.WriteLine();
-            
-            int option = ConsoleUtilities.ReadOptionInt(new[] {"Edit sets", "Pass and take tile"}, "Choose an option:");
+
+            int option = ConsoleUtilities.ReadOptionInt(new[]
+            {
+                "Edit sets",
+                tiles.Count == 0 ? "Pass" : "Pass and take tile"
+            }, "Choose an option:");
             switch (option)
             {
                 case 0:
                     EditSets();
                     break;
                 case 1:
-                    if (tiles.Count == 0)
-                    {
-                        Console.WriteLine("No more tiles left, continuing anyway"); // TODO: Change at some point so the above option doesn't display "...take tile"
-                    }
-                    else
+                    if (tiles.Count != 0)
                     {
                         GivePlayerTile(player);
                     }
+
                     break;
                 default:
                     break;
