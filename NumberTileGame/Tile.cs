@@ -11,7 +11,7 @@ namespace NumberTileGame
 
         public override string ToString()
         {
-            return $"NumberTileGame.Tile(Colour={Colour})";
+            return $"{Colour} Tile";
         }
     }
 }

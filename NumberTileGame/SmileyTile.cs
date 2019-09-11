@@ -8,7 +8,7 @@ namespace NumberTileGame
 
         public override string ToString()
         {
-            return $"NumberTileGame.SmileyTile(Colour={Colour})";
+            return $"{Colour} Smiley";
         }
     }
 }
