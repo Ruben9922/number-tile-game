@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RubenDougall.Utilities;
 
 namespace NumberTileGame
 {
@@ -87,6 +88,32 @@ namespace NumberTileGame
             Console.WriteLine();
             Console.WriteLine("Your tiles:");
             Console.WriteLine(player.Tiles.ToHumanReadableString());
+            Console.WriteLine();
+            
+            int option = ConsoleUtilities.ReadOptionInt(new[] {"Edit sets", "Pass and take tile"}, "Choose an option:");
+            switch (option)
+            {
+                case 0:
+                    EditSets();
+                    break;
+                case 1:
+                    if (tiles.Count == 0)
+                    {
+                        Console.WriteLine("No more tiles left, continuing anyway"); // TODO: Change at some point so the above option doesn't display "...take tile"
+                    }
+                    else
+                    {
+                        GivePlayerTile(player);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void EditSets()
+        {
+            throw new NotImplementedException();
         }
 
         private bool CheckPlayerNameDistinctness(string playerName)
