@@ -65,6 +65,7 @@ class Tile:
         return f"{self.color} {self.rank}" if self.rank != Tile.smiley_rank else f"{self.color} Smiley"
 
 
+# TODO: Consider what happens when tiles run out and no valid moves are possible
 class Game:
     def __init__(self):
         self.players = []
