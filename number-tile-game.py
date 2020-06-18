@@ -34,17 +34,23 @@ class Set:
         if len(self.tiles) < min_size:
             return None
 
+        first_tile = next((t for t in self.tiles if t.rank == Tile.smiley_rank), None)
+
+        # If all tiles are smileys, this is valid
+        # Can consider as either a run or group, as smileys' colours are ignored
+        if first_tile is None:
+            return SetType.GROUP
+
         # Check if run
-        # Specifically, check if ranks are consecutive and colours are the same
-        first_tile = self.tiles[0]
-        is_run = all(tile.rank == first_tile.rank + index and tile.color == first_tile.color
-                     for index, tile in enumerate(self.tiles[1:]))
+        # Specifically, check if ranks are consecutive and colours are the same (ignoring smileys)
+        is_run = all(t.rank == Tile.smiley_rank or (t.rank == first_tile.rank + i and t.color == first_tile.color)
+                     for i, t in enumerate(self.tiles))
         if is_run:
             return SetType.RUN
 
         # Check if group
-        # Specifically, check if ranks are same
-        is_group = all(tile.rank == first_tile.rank for tile in self.tiles[1:])
+        # Specifically, check if ranks are same (ignoring smileys)
+        is_group = all(t.rank == Tile.smiley_rank or t.rank == first_tile.rank for t in self.tiles)
         if is_group:
             return SetType.GROUP
 
