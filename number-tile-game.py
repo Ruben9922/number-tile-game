@@ -75,6 +75,8 @@ class Tile:
 
 
 # TODO: Consider what happens when tiles run out and no valid moves are possible
+# TODO: Could consider having option to play with playing cards instead of tiles (suits instead of colours,
+#  card ranks instead of numbers, etc.)
 class Game:
     def __init__(self):
         self.players = []
