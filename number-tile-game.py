@@ -56,6 +56,9 @@ class Set:
 
         return None  # Set is long enough but is neither a run nor a group
 
+    def valid(self):
+        return self.set_type() is not None
+
 
 class Tile:
     smiley_rank = None
