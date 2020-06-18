@@ -180,7 +180,8 @@ class Game:
             # Choose index in destination list to insert tile at
             # Insert the tile
             print("Choose position to insert tile at")
-            tile_insert_index = cu.input_option_int(list(map(str, destination_tile_list)))
+            print("The tile will be inserted before the tile at the selected position")
+            tile_insert_index = cu.input_option_int(list(map(str, destination_tile_list)) + ["<End>"])
             destination_tile_list.insert(tile_insert_index, tile)
 
             valid = all(map(Set.valid, updated_sets))
