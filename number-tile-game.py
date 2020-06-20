@@ -182,6 +182,10 @@ class Game:
             tile = source_tile_list.pop(tile_index)
             print()
 
+            print("Moving the following tile:")
+            print(tile)
+            print()
+
             # Choose list to move tile to (destination list)
             destination_tile_list = self.choose_destination_tile_list(updated_sets)
 
