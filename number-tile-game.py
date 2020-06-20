@@ -209,9 +209,9 @@ class Game:
                 print("Sets are currently INVALID")
                 print("Your changes will be LOST if you choose not to continue editing sets")
 
-            option = not cu.input_boolean("Continue editing sets?", default=True)
+            option = cu.input_boolean("Continue editing sets?", default=True)
             print()
-            if option:
+            if not option:
                 break
 
         # If resulting sets are valid, overwrite player tiles and sets
