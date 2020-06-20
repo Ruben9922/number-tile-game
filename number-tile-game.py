@@ -108,11 +108,14 @@ class Game:
                 print(f"[{index}]: {tile}")
         else:
             print("<none>")
+        print()
 
+        print("Choose an option")
         option = cu.input_option_int([
             "Edit sets",
             "Pass & take tile" if self.tiles else "Pass",
         ])
+        print()
         if option == 0:
             self.edit_sets(current_player)
         else:
@@ -175,6 +178,7 @@ class Game:
             print("Choose which tile to move")
             tile_index = cu.input_option_int(list(map(str, source_tile_list)))
             tile = source_tile_list.pop(tile_index)
+            print()
 
             # Choose list to move tile to (destination list)
             destination_tile_list = self.choose_destination_tile_list(updated_sets)
@@ -185,6 +189,7 @@ class Game:
             print("The tile will be inserted before the tile at the selected position")
             tile_insert_index = cu.input_option_int(list(map(str, destination_tile_list)) + ["<End>"])
             destination_tile_list.insert(tile_insert_index, tile)
+            print()
 
             valid = all(map(Set.valid, updated_sets))
 
@@ -195,7 +200,9 @@ class Game:
                 print("Sets are currently INVALID")
                 print("Your changes will be LOST if you choose not to continue editing sets")
 
-            if not cu.input_boolean("Continue editing sets?", default=True):
+            option = not cu.input_boolean("Continue editing sets?", default=True)
+            print()
+            if option:
                 break
 
         # If resulting sets are valid, overwrite player tiles and sets
@@ -206,6 +213,7 @@ class Game:
     def choose_source_tile_list(self, sets, player_tiles):
         print("Choose where to move a tile from")
         option = cu.input_option_int(list(map(str, self.sets)) + ["<My tiles>"])
+        print()
         if option != len(self.sets):
             return sets[option]
         return player_tiles
@@ -213,6 +221,7 @@ class Game:
     def choose_destination_tile_list(self, sets):
         print("Choose where to move the tile to")
         option = cu.input_option_int(list(map(str, self.sets)) + ["<New set>"])
+        print()
         if option != len(self.sets):
             return sets[option]
 
