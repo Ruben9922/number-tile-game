@@ -234,7 +234,7 @@ class Game:
         option = cu.input_option_int(list(map(str, sets)) + ["<New set>"])
         print()
         if option != len(sets):
-            return sets[option]
+            return sets[option].tiles
 
         new_set = Set()
         sets.append(new_set)
