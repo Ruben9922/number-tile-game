@@ -219,23 +219,25 @@ class Game:
             player.tiles = updated_player_tiles
             self.sets = updated_sets
 
-    def choose_source_tile_list(self, sets, player_tiles):
+    @staticmethod
+    def choose_source_tile_list(sets, player_tiles):
         print("Choose where to move a tile from")
-        option = cu.input_option_int(list(map(str, self.sets)) + ["<My tiles>"])
+        option = cu.input_option_int(list(map(str, sets)) + ["<My tiles>"])
         print()
-        if option != len(self.sets):
+        if option != len(sets):
             return sets[option]
         return player_tiles
 
-    def choose_destination_tile_list(self, sets):
+    @staticmethod
+    def choose_destination_tile_list(sets):
         print("Choose where to move the tile to")
-        option = cu.input_option_int(list(map(str, self.sets)) + ["<New set>"])
+        option = cu.input_option_int(list(map(str, sets)) + ["<New set>"])
         print()
-        if option != len(self.sets):
+        if option != len(sets):
             return sets[option]
 
         new_set = Set()
-        self.sets.append(new_set)
+        sets.append(new_set)
         return new_set.tiles
 
 
