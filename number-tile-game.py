@@ -35,6 +35,10 @@ class Set:
     def __init__(self):
         self.tiles = []
 
+    def __str__(self):
+        set_type = self.set_type()
+        return f"{', '.join(map(str, self.tiles))} ({set_type if set_type is not None else 'Invalid'})"
+
     def set_type(self):
         min_size = 3
 
