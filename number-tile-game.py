@@ -3,6 +3,14 @@ import random
 import console_utilities as cu
 
 
+def print_list(lst):
+    if lst:
+        for index, tile_set in enumerate(lst):
+            print(f"[{index}]: {tile_set}")
+    else:
+        print("<none>")
+
+
 class Color(Enum):
     BLACK = auto()
     BLUE = auto()
@@ -21,16 +29,6 @@ class Player:
     def __init__(self, name):
         self.name = name
         self.tiles = []
-
-    def print_tiles(self):
-        # Print the player's tiles
-        print("Your tiles:")
-        if self.tiles:
-            for index, tile in enumerate(self.tiles):
-                print(f"[{index}]: {tile}")
-        else:
-            print("<none>")
-        print()
 
 
 class Set:
@@ -103,9 +101,12 @@ class Game:
 
         print(f"{current_player.name}'s turn.")
 
-        self.print_sets()
-
-        current_player.print_tiles()
+        # Print sets and player's tiles
+        print("Sets:")
+        print_list(self.sets)
+        print("Your tiles:")
+        print_list(current_player.tiles)
+        print()
 
         print("Choose an option")
         option = cu.input_option_int([
@@ -118,15 +119,6 @@ class Game:
         else:
             if self.tiles:
                 current_player.tiles.append(self.tiles.pop())
-
-    def print_sets(self):
-        # Print the tiles on the table
-        print("Sets:")
-        if self.sets:
-            for index, tile_set in enumerate(self.sets):
-                print(f"[{index}]: {tile_set}")
-        else:
-            print("<none>")
 
     def input_player_names(self):
         while True:
@@ -197,8 +189,12 @@ class Game:
             destination_tile_list.insert(tile_insert_index, tile)
             print()
 
-            self.print_sets()
-            player.print_tiles()
+            # Print updated sets and player's tiles
+            print("Updated sets:")
+            print_list(updated_sets)
+            print("Your updated tiles:")
+            print_list(updated_player_tiles)
+            print()
 
             valid = all(map(Set.valid, updated_sets))
 
