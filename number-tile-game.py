@@ -197,6 +197,9 @@ class Game:
             destination_tile_list.insert(tile_insert_index, tile)
             print()
 
+            self.print_sets()
+            player.print_tiles()
+
             valid = all(map(Set.valid, updated_sets))
 
             if valid:
