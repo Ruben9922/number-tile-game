@@ -22,6 +22,16 @@ class Player:
         self.name = name
         self.tiles = []
 
+    def print_tiles(self):
+        # Print the player's tiles
+        print("Your tiles:")
+        if self.tiles:
+            for index, tile in enumerate(self.tiles):
+                print(f"[{index}]: {tile}")
+        else:
+            print("<none>")
+        print()
+
 
 class Set:
     def __init__(self):
@@ -93,22 +103,9 @@ class Game:
 
         print(f"{current_player.name}'s turn.")
 
-        # Print the tiles on the table
-        print("Sets:")
-        if self.sets:
-            for index, tile_set in enumerate(self.sets):
-                print(f"[{index}]: {tile_set}")
-        else:
-            print("<none>")
+        self.print_sets()
 
-        # Print the player's tiles
-        print("Your tiles:")
-        if current_player.tiles:
-            for index, tile in enumerate(current_player.tiles):
-                print(f"[{index}]: {tile}")
-        else:
-            print("<none>")
-        print()
+        current_player.print_tiles()
 
         print("Choose an option")
         option = cu.input_option_int([
@@ -121,6 +118,15 @@ class Game:
         else:
             if self.tiles:
                 current_player.tiles.append(self.tiles.pop())
+
+    def print_sets(self):
+        # Print the tiles on the table
+        print("Sets:")
+        if self.sets:
+            for index, tile_set in enumerate(self.sets):
+                print(f"[{index}]: {tile_set}")
+        else:
+            print("<none>")
 
     def input_player_names(self):
         while True:
