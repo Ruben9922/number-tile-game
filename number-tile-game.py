@@ -17,11 +17,17 @@ class Color(Enum):
     ORANGE = auto()
     RED = auto()
 
+    def __str__(self):
+        return self.name.capitalize()
+
 
 class SetType(Enum):
     RUN = auto()
     GROUP = auto()
     INVALID = auto()
+
+    def __str__(self):
+        return self.name.capitalize()
 
 
 class Player:
