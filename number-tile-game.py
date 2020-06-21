@@ -95,6 +95,9 @@ class Tile:
 # TODO: Consider what happens when tiles run out and no valid moves are possible
 # TODO: Could consider having option to play with playing cards instead of tiles (suits instead of colours,
 #  card ranks instead of numbers, etc.)
+# TODO: Could provide messages for invalid sets - e.g. "Set is too short", "Run must contain tiles of the same colour"
+# TODO: Check player has actually placed any of their tiles after editing sets (maybe change menu)
+# TODO: Delete empty sets
 class Game:
     def __init__(self):
         self.players = []
