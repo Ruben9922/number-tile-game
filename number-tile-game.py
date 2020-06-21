@@ -21,6 +21,7 @@ class Color(Enum):
 class SetType(Enum):
     RUN = auto()
     GROUP = auto()
+    INVALID = auto()
 
 
 class Player:
@@ -36,15 +37,14 @@ class Set:
         self.tiles = []
 
     def __str__(self):
-        set_type = self.set_type()
-        return f"{', '.join(map(str, self.tiles))} ({set_type if set_type is not None else 'Invalid'})"
+        return f"{', '.join(map(str, self.tiles))} ({self.set_type()})"
 
     def set_type(self):
         min_size = 3
 
         # Check whether set is too short
         if len(self.tiles) < min_size:
-            return None
+            return SetType.INVALID
 
         first_tile = next((t for t in self.tiles if t.rank == Tile.smiley_rank), None)
 
@@ -66,10 +66,10 @@ class Set:
         if is_group:
             return SetType.GROUP
 
-        return None  # Set is long enough but is neither a run nor a group
+        return SetType.INVALID  # Set is long enough but is neither a run nor a group
 
     def valid(self):
-        return self.set_type() is not None
+        return self.set_type() != SetType.INVALID
 
 
 class Tile:
