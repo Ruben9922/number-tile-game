@@ -97,7 +97,6 @@ class Tile:
 #  card ranks instead of numbers, etc.)
 # TODO: Could provide messages for invalid sets - e.g. "Set is too short", "Run must contain tiles of the same colour"
 # TODO: Check player has actually placed any of their tiles after editing sets (maybe change menu)
-# TODO: Delete empty sets
 class Game:
     def __init__(self):
         self.players = []
@@ -194,6 +193,9 @@ class Game:
             print("Moving the following tile:")
             print(tile)
             print()
+
+            # Remove empty sets
+            updated_sets = [s for s in updated_sets if len(s.tiles) < 0]
 
             # Choose list to move tile to (destination list)
             destination_tile_list = self.choose_destination_tile_list(updated_sets)
