@@ -229,7 +229,7 @@ class Game:
         option = cu.input_option_int(list(map(str, sets)) + ["<My tiles>"])
         print()
         if option != len(sets):
-            return sets[option]
+            return sets[option].tiles
         return player_tiles
 
     @staticmethod
