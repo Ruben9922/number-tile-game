@@ -52,7 +52,7 @@ class Set:
         if len(self.tiles) < min_size:
             return SetType.INVALID
 
-        first_tile = next((t for t in self.tiles if t.rank == Tile.smiley_rank), None)
+        first_tile = next((t for t in self.tiles if t.rank != Tile.smiley_rank), None)
 
         # If all tiles are smileys, this is valid
         # Can consider as either a run or group, as smileys' colours are ignored
