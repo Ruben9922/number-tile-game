@@ -110,28 +110,32 @@ class Game:
         self.distribute_tiles()
 
     def play(self):
-        current_player = self.players[0]
+        n = 0
+        while True:
+            current_player = self.players[n]
 
-        print(f"{current_player.name}'s turn.")
+            print(f"{current_player.name}'s turn.")
 
-        # Print sets and player's tiles
-        print("Sets:")
-        print_list(self.sets)
-        print("Your tiles:")
-        print_list(current_player.tiles)
-        print()
+            # Print sets and player's tiles
+            print("Sets:")
+            print_list(self.sets)
+            print("Your tiles:")
+            print_list(current_player.tiles)
+            print()
 
-        print("Choose an option")
-        option = cu.input_option_int([
-            "Edit sets",
-            "Pass & take tile" if self.tiles else "Pass",
-        ])
-        print()
-        if option == 0:
-            self.edit_sets(current_player)
-        else:
-            if self.tiles:
-                current_player.tiles.append(self.tiles.pop())
+            print("Choose an option")
+            option = cu.input_option_int([
+                "Edit sets",
+                "Pass & take tile" if self.tiles else "Pass",
+            ])
+            print()
+            if option == 0:
+                self.edit_sets(current_player)
+            else:
+                if self.tiles:
+                    current_player.tiles.append(self.tiles.pop())
+
+            n = (n + 1) % len(self.players)
 
     def input_player_names(self):
         while True:
