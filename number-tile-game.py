@@ -196,7 +196,7 @@ class Game:
             print()
 
             # Remove empty sets
-            updated_sets = [s for s in updated_sets if len(s.tiles) < 0]
+            updated_sets = [s for s in updated_sets if len(s.tiles) > 0]
 
             # Choose list to move tile to (destination list)
             destination_tile_list = self.choose_destination_tile_list(updated_sets)
