@@ -98,6 +98,7 @@ class Tile:
 # TODO: Could provide messages for invalid sets - e.g. "Set is too short", "Run must contain tiles of the same colour"
 # TODO: Check player has actually placed any of their tiles after editing sets (maybe change menu)
 # TODO: Maybe add titles to each section of the program
+# TODO: Maybe prevent colours from repeating in groups, perhaps as an option
 class Game:
     def __init__(self):
         self.players = []
