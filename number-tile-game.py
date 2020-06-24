@@ -233,13 +233,19 @@ class Game:
             print_list(updated_player_tiles)
             print()
 
-            valid = all(map(Set.valid, updated_sets))
+            # Check that all sets are valid and the player actually placed one or more tiles
+            sets_valid = all(map(Set.valid, updated_sets))
+            player_tiles_placed = len(updated_player_tiles) < len(player.tiles)
+            valid = sets_valid and player_tiles_placed
 
             if valid:
                 print("Sets are currently VALID")
                 print("Your changes will be SAVED if you choose not to continue editing sets")
             else:
-                print("Sets are currently INVALID")
+                if sets_valid:
+                    print("Sets are currently VALID but you didn't place any of your tiles")
+                else:
+                    print("Sets are currently INVALID")
                 print("Your changes will be LOST if you choose not to continue editing sets")
 
             option = cu.input_boolean("Continue editing sets?", default=True)
@@ -247,7 +253,7 @@ class Game:
             if not option:
                 break
 
-        # If resulting sets are valid, overwrite player tiles and sets
+        # If valid, overwrite player tiles and sets
         if valid:
             player.tiles = updated_player_tiles
             self.sets = updated_sets
