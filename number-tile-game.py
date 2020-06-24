@@ -1,6 +1,7 @@
 from enum import Enum, auto
 import random
 import console_utilities as cu
+import copy
 
 
 def print_list(lst):
@@ -200,7 +201,7 @@ class Game:
 
     def edit_sets(self, player):
         updated_player_tiles = player.tiles.copy()
-        updated_sets = self.sets.copy()
+        updated_sets = copy.deepcopy(self.sets)
 
         while True:
             # Choose list to move tile from (source list)
