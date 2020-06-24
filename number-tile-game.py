@@ -144,6 +144,11 @@ class Game:
 
             n = (n + 1) % len(self.players)
 
+        # Winning player is the one with fewest tiles remaining
+        # If the game ended due to a player using up all their tiles (2nd condition above), the winner is that player
+        winning_player = min(self.players, key=lambda p: len(p.tiles))
+        print(f"{winning_player} wins!")
+
     def input_player_names(self):
         while True:
             while True:
