@@ -92,13 +92,13 @@ class Tile:
         return f"{self.color} {self.rank}" if self.rank != Tile.smiley_rank else f"{self.color} Smiley"
 
 
-# TODO: Consider what happens when tiles run out and no valid moves are possible
 # TODO: Could consider having option to play with playing cards instead of tiles (suits instead of colours,
 #  card ranks instead of numbers, etc.)
 # TODO: Could provide messages for invalid sets - e.g. "Set is too short", "Run must contain tiles of the same colour"
 # TODO: Check player has actually placed any of their tiles after editing sets (maybe change menu)
 # TODO: Maybe add titles to each section of the program
 # TODO: Maybe prevent colours from repeating in groups, perhaps as an option
+# TODO: Potentially add ability to detect if any moves are possible
 class Game:
     def __init__(self):
         self.players = []
@@ -112,7 +112,8 @@ class Game:
 
     def play(self):
         n = 0
-        while True:
+        consecutive_passes = 0
+        while consecutive_passes < len(self.players):
             current_player = self.players[n]
 
             print(f"{current_player.name}'s turn.")
@@ -135,6 +136,11 @@ class Game:
             else:
                 if self.tiles:
                     current_player.tiles.append(self.tiles.pop())
+
+            if option == 1 and not self.tiles:
+                consecutive_passes += 1
+            else:
+                consecutive_passes = 0
 
             n = (n + 1) % len(self.players)
 
