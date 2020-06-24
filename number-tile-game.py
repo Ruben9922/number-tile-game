@@ -113,7 +113,7 @@ class Game:
     def play(self):
         n = 0
         consecutive_passes = 0
-        while consecutive_passes < len(self.players):
+        while consecutive_passes < len(self.players) and all(map(lambda p: p.tiles, self.players)):
             current_player = self.players[n]
 
             print(f"{current_player.name}'s turn.")
