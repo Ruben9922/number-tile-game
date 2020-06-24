@@ -100,6 +100,7 @@ class Tile:
 # TODO: Maybe add titles to each section of the program
 # TODO: Maybe prevent colours from repeating in groups, perhaps as an option
 # TODO: Potentially add ability to detect if any moves are possible
+# TODO: Could highlight the newly moved tile
 class Game:
     def __init__(self):
         self.players = []
