@@ -101,6 +101,7 @@ class Tile:
 # TODO: Maybe prevent colours from repeating in groups, perhaps as an option
 # TODO: Potentially add ability to detect if any moves are possible
 # TODO: Could highlight the newly moved tile
+# TODO: Fix loophole where not saving invalid sets means player doesn't have to take a tile
 class Game:
     def __init__(self):
         self.players = []
