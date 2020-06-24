@@ -14,6 +14,7 @@ import java.util.Scanner;
 // TODO: Make tile lists sorted
 // TODO: Remove separate "step" of choosing between new and existing sets
 // TODO: Display destination tile list
+// TODO: Clear terminal output between turns
 class NumberGame {
     private List<Player> players = new LinkedList<>();
     private List<Tile> tiles = new LinkedList<>(); // Tiles not yet given to a player // TODO: Possibly change tile and set lists to array lists
@@ -206,7 +207,7 @@ class NumberGame {
         List<Set> updatedSets = new LinkedList<>(sets);
         do {
             // Choose tile lists to move tiles from and to respectively
-            // Choose from updatedSets as don't want to edit
+            // Choose from updatedSets as don't necessarily want to modify original sets
             List<Tile> sourceTileList = chooseSourceTileList(scanner, updatedSets, updatedPlayerTiles);
             List<Tile> destinationTileList = chooseDestinationTileList(scanner, updatedSets);
             moveTile(scanner, sourceTileList, destinationTileList);
