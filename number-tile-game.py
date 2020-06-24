@@ -136,7 +136,10 @@ class Game:
                 self.edit_sets(current_player)
             else:
                 if self.tiles:
-                    current_player.tiles.append(self.tiles.pop())
+                    new_tile = self.tiles.pop()
+                    current_player.tiles.append(new_tile)
+                    print(f"Picked up: {new_tile}")
+                    print()
 
             if option == 1 and not self.tiles:
                 consecutive_passes += 1
