@@ -102,7 +102,6 @@ class Tile:
 # TODO: Maybe prevent colours from repeating in groups, perhaps as an option
 # TODO: Potentially add ability to detect if any moves are possible
 # TODO: Could highlight the newly moved tile
-# TODO: Fix loophole where not saving invalid sets means player doesn't have to take a tile
 class Game:
     def __init__(self):
         self.players = []
@@ -129,20 +128,24 @@ class Game:
             print_list(current_player.tiles)
             print()
 
-            print("Choose an option")
-            option = cu.input_option_int([
-                "Edit sets",
-                "Pass & take tile" if self.tiles else "Pass",
-            ])
-            print()
-            if option == 0:
-                self.edit_sets(current_player)
-            else:
-                if self.tiles:
-                    new_tile = self.tiles.pop()
-                    current_player.tiles.append(new_tile)
-                    print(f"Picked up: {new_tile}")
-                    print()
+            valid = False
+            while True:
+                print("Choose an option")
+                option = cu.input_option_int([
+                    "Edit sets",
+                    "End turn" if valid else ("Pass & take tile" if self.tiles else "Pass"),
+                ])
+                print()
+
+                if option == 0:
+                    valid = self.edit_sets(current_player)
+                else:
+                    if self.tiles and not valid:
+                        new_tile = self.tiles.pop()
+                        current_player.tiles.append(new_tile)
+                        print(f"Picked up: {new_tile}")
+                        print()
+                    break
 
             if option == 1 and not self.tiles:
                 consecutive_passes += 1
@@ -263,6 +266,8 @@ class Game:
         if valid:
             player.tiles = updated_player_tiles
             self.sets = updated_sets
+
+        return valid
 
     @staticmethod
     def choose_source_tile_list(sets, player_tiles):
