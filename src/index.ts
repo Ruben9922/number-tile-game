@@ -1,2 +1,4 @@
-const x: string = "jdsahkajds";
-console.log(x);
+import {Game} from "./game";
+
+let game = new Game();
+game.play();
