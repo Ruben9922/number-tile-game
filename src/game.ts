@@ -6,7 +6,6 @@ import Player from "./player";
 import Tile from "./tile";
 import Set from "./set";
 import {Color} from "./color";
-import {SetType} from "./set-type";
 import inquirer from "inquirer";
 
 type MenuChoiceValue = "edit-sets" | "end-turn";
