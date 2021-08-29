@@ -24,14 +24,6 @@ export default class Set {
 
     // Check if run
     // Specifically, check if ranks are consecutive and colours are the same (ignoring smileys)
-    // const isRun: boolean = R.all(
-    //   (x: boolean) => x,
-    //   R.addIndex<Tile>(R.map)(
-    //     (tile: Tile, index: number) =>
-    //       tile.rank === null || (tile.rank === refTile.rank! - refTileIndex + index && tile.color === refTile.color),
-    //     tiles
-    //   )
-    // );
     const isRun: boolean = this.tiles.every((tile, index) =>
       tile.rank === null || (tile.rank === refTile.rank! - refTileIndex + index && tile.color === refTile.color));
     if (isRun) {
