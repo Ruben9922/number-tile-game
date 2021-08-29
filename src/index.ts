@@ -49,10 +49,6 @@ function tileCompareFunction(tile1: Tile, tile2: Tile) {
 // TODO: Allow not saving updated sets even if valid
 // TODO: Hide <My tiles> from source list options if empty
 
-let players: Player[] = [];
-let tiles: Tile[] = [];
-let sets: Set[] = [];
-
 async function play(): Promise<void> {
   await setup();
 
@@ -355,5 +351,9 @@ async function chooseDestinationTileList(sets: Set[]): Promise<Tile[]> {
 
   return sets[choice].tiles;
 }
+
+let players: Player[] = [];
+let tiles: Tile[] = [];
+let sets: Set[] = [];
 
 play();
