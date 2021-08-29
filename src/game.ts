@@ -24,6 +24,20 @@ function listToString<T>(list: T[]): string {
   return list.map((value, index) => `[${index}]: ${value}`).join("\n");
 }
 
+function tileCompareFunction(tile1: Tile, tile2: Tile) {
+  // Sort player tiles first by rank and then by colour
+  if (tile1.rank === tile2.rank) {
+    return tile1.color - tile2.color;
+  }
+  if (tile1.rank === null) {
+    return -1;
+  }
+  if (tile2.rank === null) {
+    return 1;
+  }
+  return tile1.rank - tile2.rank;
+}
+
 // TODO: Could consider having option to play with playing cards instead of tiles (suits instead of colours,
 //  card ranks instead of numbers, etc.)
 // TODO: Could provide messages for invalid sets - e.g. "Set is too short", "Run must contain tiles of the same colour"
@@ -91,6 +105,7 @@ export class Game {
               currentPlayer.tiles.push(newTile);
               console.log(`Picked up: ${newTile}`);
               console.log();
+              currentPlayer.tiles.sort(tileCompareFunction);
             }
             break;
         }
@@ -185,6 +200,7 @@ export class Game {
     const playerTileCount = 14; // Number of tiles to initially give each player
     for (const player of this.players) {
       player.tiles = this.tiles.splice(0, playerTileCount);
+      player.tiles.sort(tileCompareFunction);
     }
   }
 
