@@ -328,8 +328,7 @@ func distributeTiles(players []player, tiles *[]tile) {
 	for i := range players {
 		p := &players[i]
 		p.tiles = append(p.tiles, (*tiles)[:playerTileCount]...)
-		updatedTiles := (*tiles)[playerTileCount:]
-		tiles = &updatedTiles
+		*tiles = (*tiles)[playerTileCount:]
 
 		sortTiles(p.tiles)
 	}
